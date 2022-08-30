@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function VideoGridItem({ video = {} }) {
+export default function VideoGridItem({ video = {},handleAuthorChange}) {
     const { id, thumbnail, title, duration, author, avatar, views, date } =
         video;
 
@@ -30,7 +30,7 @@ export default function VideoGridItem({ video = {} }) {
                         />
                     </Link>
 
-                    <div clas="flex flex-col">
+                    <div className="flex flex-col">
                         <Link to={`videos/${id}`}>
                             <p className="text-slate-900 text-sm font-semibold">
                                 {title}
@@ -39,6 +39,7 @@ export default function VideoGridItem({ video = {} }) {
                         <Link
                             className="text-gray-400 text-xs mt-2 hover:text-gray-600"
                             to={`videos/${id}`}
+                            onClick={(e)=>handleAuthorChange(e,author)}
                         >
                             {author}
                         </Link>
