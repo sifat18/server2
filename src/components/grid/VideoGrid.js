@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMatch, useNavigate } from "react-router-dom";
-import { authorAdd, authorRemove, searchRemove, tagRemoveAll } from "../../features/filter/filterSlice";
+import { authorAdd, authorRemove, pageChange, searchRemove, tagRemoveAll } from "../../features/filter/filterSlice";
 import { fetchVideos } from "../../features/videos/videosSlice";
 import Loading from "../ui/Loading";
 import VideoGridItem from "./VideoGridItem";
@@ -16,19 +16,18 @@ export default function VideGrid() {
 
     const match = useMatch("/");
     const navigate = useNavigate();
-    const { tags, search,author } = useSelector((state) => state.filter);
+    const { tags, search,author,page } = useSelector((state) => state.filter);
 
     useEffect(() => {
-        dispatch(fetchVideos({ tags, search,author }));
-    }, [dispatch, tags, search,author]);
+        dispatch(fetchVideos({ tags, search,author,page }));
+    }, [dispatch, tags, search,author,page]);
 
     
     const handleAuthorChange = (e,author) => {
         e.preventDefault();
-       dispatch(tagRemoveAll)
+       dispatch(tagRemoveAll([]))
 
-        dispatch(searchRemove)
-        console.log(tags) 
+        dispatch(searchRemove(""))
 
         dispatch(authorAdd(author))
         // setAuthor(author)
@@ -43,13 +42,9 @@ export default function VideGrid() {
         console.log('hitting')
          dispatch(tagRemoveAll([]))
          dispatch(authorRemove(''))
-         dispatch(searchRemove(''))
-         
-         console.log(tags)
-         console.log(search)
-         console.log(author)
-
-    }
+         dispatch(searchRemove(""))
+         dispatch(pageChange(1))
+             }
     // decide what to render
     let content;
 

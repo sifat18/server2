@@ -4,6 +4,7 @@ const initialState = {
     tags: [],
     search: "",
     author: "",
+    page:1
 };
 
 const filterSlice = createSlice({
@@ -27,7 +28,8 @@ const filterSlice = createSlice({
             state.tags=action.payload
             },
         searchRemove: (state, action) => {
-                state.search = '';
+            console.log('inside')
+                state.search = action.payload;
             },
         authorRemove: (state, action) => {
                 state.author = '';
@@ -36,8 +38,11 @@ const filterSlice = createSlice({
         authorAdd: (state, action) => {
                 state.author = action.payload;
             },
+        pageChange: (state, action) => {
+                state.page=action.payload;
+            },
           },
 });
 
 export default filterSlice.reducer;
-export const { tagSelected, tagRemoved, searched,tagRemoveAll,searchRemove,authorRemove,authorAdd } = filterSlice.actions;
+export const { tagSelected, tagRemoved, searched,tagRemoveAll,searchRemove,authorRemove,authorAdd,pageChange } = filterSlice.actions;
