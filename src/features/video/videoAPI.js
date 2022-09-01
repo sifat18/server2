@@ -8,8 +8,8 @@ export const getVideo = async (id) => {
 
 // 
 
-export const updateLike = async (id,likes) => {
-    const response = await fetch(`http://localhost:9000/videos//${id}`, {
+export const updateLike = async (id, likes) => {
+    const response = await fetch(`https://cryptic-forest-09082.herokuapp.com/videos//${id}`, {
         method: "PATCH",
         body: JSON.stringify({
             likes: likes,
@@ -19,11 +19,11 @@ export const updateLike = async (id,likes) => {
         },
     });
     const video = await response.json();
-console.log( 'api',video)
+    console.log('api', video)
     return video.likes
 };
-export const updateUnLike = async (id,unlikes) => {
-    const response = await fetch(`http://localhost:9000/videos//${id}`, {
+export const updateUnLike = async (id, unlikes) => {
+    const response = await fetch(`https://cryptic-forest-09082.herokuapp.com/videos//${id}`, {
         method: "PATCH",
         body: JSON.stringify({
             unlikes: unlikes,
@@ -33,6 +33,6 @@ export const updateUnLike = async (id,unlikes) => {
         },
     });
     const video = await response.json();
-console.log( 'api',video)
+    console.log('api', video)
     return video.unlikes
 };
