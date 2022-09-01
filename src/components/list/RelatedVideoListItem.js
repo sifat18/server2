@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function RelatedVideoListItem({ video }) {
+export default function RelatedVideoListItem({ video,handleAuthorChange }) {
     const { id, thumbnail, title, duration, author, views, date } = video || {};
 
     return (
@@ -23,7 +23,7 @@ export default function RelatedVideoListItem({ video }) {
                 <Link
                     className="text-gray-400 text-xs mt-2 hover:text-gray-600"
                     to={`/videos/${id}`}
-                >
+                onClick={(e)=>handleAuthorChange(e,author)}>
                     {author}
                 </Link>
                 <p className="text-gray-400 text-xs mt-1">

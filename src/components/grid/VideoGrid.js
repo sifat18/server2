@@ -1,33 +1,55 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMatch, useNavigate } from "react-router-dom";
+import { authorAdd, authorRemove, searchRemove, tagRemoveAll } from "../../features/filter/filterSlice";
 import { fetchVideos } from "../../features/videos/videosSlice";
 import Loading from "../ui/Loading";
 import VideoGridItem from "./VideoGridItem";
 
 export default function VideGrid() {
-    const [author, setAuthor] = useState('')
     const dispatch = useDispatch();
     const { videos, isLoading, isError, error } = useSelector(
         (state) => state.videos
     );
+// my code
+    // const [author, setAuthor] = useState('')
+
     const match = useMatch("/");
     const navigate = useNavigate();
-    const { tags, search } = useSelector((state) => state.filter);
+    const { tags, search,author } = useSelector((state) => state.filter);
 
     useEffect(() => {
         dispatch(fetchVideos({ tags, search,author }));
     }, [dispatch, tags, search,author]);
 
+    
     const handleAuthorChange = (e,author) => {
         e.preventDefault();
-        setAuthor(author)
+       dispatch(tagRemoveAll)
+
+        dispatch(searchRemove)
+        console.log(tags) 
+
+        dispatch(authorAdd(author))
+        // setAuthor(author)
 
         // if user is not in home page, redirect to home page
         if (!match) {
             navigate("/");
         }
     };
+    const handleReset=(e)=>{
+        e.preventDefault();
+        console.log('hitting')
+         dispatch(tagRemoveAll([]))
+         dispatch(authorRemove(''))
+         dispatch(searchRemove(''))
+         
+         console.log(tags)
+         console.log(search)
+         console.log(author)
+
+    }
     // decide what to render
     let content;
 
@@ -46,12 +68,17 @@ export default function VideGrid() {
     }
     
     return (
+        <>
+        <div className="ml-auto mr-24 bg-green-100 text-white-600  w-20 py-2  px-5 rounded-full cursor-pointer" onClick={(e)=>handleReset(e)}>
+        Reset
+        </div>
         <section className="pt-12">
+        
             <section className="pt-12">
                 <div className="grid grid-cols-12 gap-4 max-w-7xl mx-auto px-5 lg:px-0 min-h-[300px]">
                     {content}
                 </div>
             </section>
         </section>
-    );
+        </>    );
 }
