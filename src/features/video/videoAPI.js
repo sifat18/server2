@@ -8,17 +8,31 @@ export const getVideo = async (id) => {
 
 // 
 
-export const updateLike = async (id,curVal) => {
+export const updateLike = async (id,likes) => {
     const response = await fetch(`http://localhost:9000/videos//${id}`, {
         method: "PATCH",
         body: JSON.stringify({
-            likes: curVal+1,
+            likes: likes,
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8",
         },
     });
-    const todo = await response.json();
-
-    return todo
+    const video = await response.json();
+console.log( 'api',video.likes)
+    // return video.likes
+};
+export const updateUnLike = async (id,unlikes) => {
+    const response = await fetch(`http://localhost:9000/videos//${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+            unlikes: unlikes,
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+    });
+    const video = await response.json();
+// console.log( 'api',video.likes)
+    return video.unlikes
 };
