@@ -1,19 +1,18 @@
+import { useDispatch, useSelector } from 'react-redux';
 import likeImage from "../../assets/like.svg";
 import unlikeImage from "../../assets/unlike.svg";
-import { useDispatch } from 'react-redux';
-import { addlikes, likePost, unlikePost } from "../../features/video/videoSlice";
+import { likePost, unlikePost } from "../../features/video/videoSlice";
 
-export default function LikeUnlike({likes,unlikes,id}) {
+export default function LikeUnlike() {
     const dispatch=useDispatch()
-    const likeUpdate=async(id,likes)=>{
+    const {id,likes,unlikes } = useSelector(    (state) => state.video.video);
+    const likeUpdate=(id,likes)=>{
         console.log('isnde',id,likes)
        dispatch(likePost({id,likes}))
-dispatch(addlikes(likes))
     }
-    const unlikeUpdate=async(id,unlikes)=>{
+    const unlikeUpdate=(id,unlikes)=>{
         console.log('isnde',id,unlikes)
        dispatch(unlikePost({id,unlikes}))
-// dispatch(addlikes(likes))
     }
     return (
         <div className="flex gap-10 w-48">
@@ -21,7 +20,7 @@ dispatch(addlikes(likes))
                 <div className="shrink-0">
                     <img className="w-5 block" src={likeImage} alt="Like" onClick={()=>likeUpdate(id,likes)}/>
                 </div>
-                <div className="text-sm leading-[1.7142857] text-slate-600" onClick={()=>likeUpdate(id,likes)}>
+                <div className="text-sm leading-[1.7142857] text-slate-600" >
                     {likes}
                 </div>
             </div>
@@ -29,7 +28,7 @@ dispatch(addlikes(likes))
                 <div className="shrink-0">
                     <img className="w-5 block" src={unlikeImage} alt="Unlike" onClick={()=>unlikeUpdate(id,unlikes)}/>
                 </div>
-                <div className="text-sm leading-[1.7142857] text-slate-600" onClick={()=>unlikeUpdate(id,unlikes)}>
+                <div className="text-sm leading-[1.7142857] text-slate-600" >
                     {unlikes}
                 </div>
             </div>

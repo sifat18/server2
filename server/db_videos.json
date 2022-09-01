@@ -16,8 +16,8 @@
         "react",
         "tips"
       ],
-      "likes": 26,
-      "unlikes": -28
+      "likes": 0,
+      "unlikes": 0
     },
     {
       "id": 2,
@@ -34,8 +34,8 @@
         "vscode",
         "tips"
       ],
-      "likes": 0,
-      "unlikes": 0
+      "likes": 9,
+      "unlikes": 9
     },
     {
       "id": 3,

@@ -1,9 +1,7 @@
 import LikeUnlike from "./LikeUnlike";
-import { useDispatch } from 'react-redux';
-import { likePost } from "../../features/video/videoSlice";
 
 export default function VideoDescription({ video }) {
-    const { title, date, description,likes, unlikes,id } = video;
+    const { title, date, description } = video;
    
     return (
         <div>
@@ -15,7 +13,7 @@ export default function VideoDescription({ video }) {
                     Uploaded on {date}
                 </h2>
 
-                <LikeUnlike likes={likes} unlikes={unlikes} id={id}/>
+                <LikeUnlike />
             </div>
 
             <div className="mt-4 text-sm text-[#334155] dark:text-slate-400">

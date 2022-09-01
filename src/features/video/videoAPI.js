@@ -19,8 +19,8 @@ export const updateLike = async (id,likes) => {
         },
     });
     const video = await response.json();
-console.log( 'api',video.likes)
-    // return video.likes
+console.log( 'api',video)
+    return video.likes
 };
 export const updateUnLike = async (id,unlikes) => {
     const response = await fetch(`http://localhost:9000/videos//${id}`, {
@@ -33,6 +33,6 @@ export const updateUnLike = async (id,unlikes) => {
         },
     });
     const video = await response.json();
-// console.log( 'api',video.likes)
+console.log( 'api',video)
     return video.unlikes
 };
